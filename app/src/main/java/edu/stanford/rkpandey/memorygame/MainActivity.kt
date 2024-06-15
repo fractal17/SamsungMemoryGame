@@ -19,9 +19,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val images = mutableListOf(R.drawable.ic_bull, R.drawable.ic_doge, R.drawable.ic_duck, R.drawable.ic_fox)
-        // Add each image twice so we can create pairs
+        
         images.addAll(images)
-        // Randomize the order of images
+        
         images.shuffle()
 
         buttons = listOf(imageButton1, imageButton2, imageButton3, imageButton4, imageButton5,
@@ -34,9 +34,9 @@ class MainActivity : AppCompatActivity() {
         buttons.forEachIndexed { index, button ->
             button.setOnClickListener {
                 Log.i(TAG, "кнопка нажата!!")
-                // Update models
+                
                 updateModels(index)
-                // Update the UI for the game
+                
                 updateViews()
             }
         }
@@ -54,15 +54,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateModels(position: Int) {
         val card = cards[position]
-        // Error checking:
+        
         if (card.isFaceUp) {
             Toast.makeText(this, "неверный шаг!", Toast.LENGTH_SHORT).show()
             return
         }
-        // Three cases
-        // 0 cards previously flipped over => restore cards + flip over the selected card
-        // 1 card previously flipped over => flip over the selected card + check if the images match
-        // 2 cards previously flipped over => restore cards + flip over the selected card
+        
         if (indexOfSingleSelectedCard == null) {
             // 0 or 2 selected cards previously
             restoreCards()
